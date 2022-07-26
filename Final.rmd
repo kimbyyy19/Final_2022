@@ -140,7 +140,7 @@ table1 <- xtabs(~infected + treatment, data=Females)
 rowPerc(table1)
 colPerc(table1)
 ```  
-
+The percentage of infection is much higher for Females who took the placebo. Those who took the placebo became infected approximately 58.89%  of the time versus 41.11% who took the vaccine and contracted covid19. The Females in the placebo group are 1.5 times more likely to become infected when receiving the placebo.
 
 
 ## Inferential Results
