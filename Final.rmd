@@ -143,7 +143,11 @@ The percentage of infection is higher for subgroup LGBTQ who took the vaccine. T
 
 
 ## Inferential Results
-
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```    
 
 ## Druggies
 ## Graphic Descriptive Results
