@@ -129,6 +129,10 @@ barchartGC(~infected + treatment,data=LGBTQ)
 barchartGC(~infected + treatment,data=LGBTQ, type="percent")
 ```  
 
+The bar chart shows that Females who take the vaccine (covid91) are less likely to contract the virus covid19. Females who took the placebo are 58% more likely to contract covid19 versus Females who took the vaccine and contacted covid19 42% of the time.
+
+
+
 ## Numerical Summaries
 ## Inferential Results
 
