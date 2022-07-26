@@ -124,23 +124,15 @@ LGBTQ = filter(FinalData,LGBTQ=="gay")
 
 
 ## Graphic Descriptive Results
-```{r}
-barchartGC(~infected + treatment,data=LGBTQ)
-barchartGC(~infected + treatment,data=LGBTQ, type="percent")
-```  
 
-The bar chart shows that Females who take the vaccine (covid91) are less likely to contract the virus covid19. Females who took the placebo are 58% more likely to contract covid19 versus Females who took the vaccine and contacted covid19 42% of the time.
+
 
 
 
 ## Numerical Summaries
 
-```{r}
-table1 <- xtabs(~infected + treatment, data=Females)
-rowPerc(table1)
-colPerc(table1)
-```  
-The percentage of infection is much higher for Females who took the placebo. Those who took the placebo became infected approximately 58.89%  of the time versus 41.11% who took the vaccine and contracted covid19. The Females in the placebo group are 1.5 times more likely to become infected when receiving the placebo.
+
+
 
 
 ## Inferential Results
