@@ -51,6 +51,16 @@ basicCC + geom_bar(stat="identity", position = "dodge")
 ```
 The bar chart shows that males who take the vaccine (covid91) are far less likely to contract the virus covid19. Males who take the placebo are 68% more likely to contract covid19 versus males who took the vaccine and contacted covid19 32% of the time. 
 ## Numerical Summaries
+
+```{r}
+table1 <- xtabs(~infected + treatment, data=Males)
+rowPerc(table1)
+colPerc(table1)
+```  
+The percentage of infection is much higher for males who took the placebo. Those who took the placebo became infected approximately 67.78%  of the time versus 32.22% who took the vaccine and contracted covid19. The Males in the placebo group are 2 times more likely to become infected when receiving the placebo.
+
+
+
 ## Inferential Results
 
 
