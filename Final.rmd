@@ -62,6 +62,16 @@ The percentage of infection is much higher for males who took the placebo. Those
 
 
 ## Inferential Results
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```  
+
+I reject the  Null Hypothesis, and accept the Alternative hypothesis as true. There is a significant negative effect when Males took the placebo vs the covid91 vaccine which has a positive effect.  The Chi-squared test shows that the P-value is 0.00000000004812 an amount significantly less than .05. The Fisher exact test shows the P-Value is 0.00000000002645 also an number significalty less than 0.05. The test also confirms that the odds ratio of men who take the placebo contract covid19 2 to 1 more times. The covid91 vaccine is effective for the Male subgroup tested. I would recommend the Covid91 vaccine for the Male subgroup. 
+
+
+
 
 
 ## Females
