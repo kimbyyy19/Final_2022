@@ -102,7 +102,11 @@ The percentage of infection is much higher for Females who took the placebo. Tho
 
 
 ## Inferential Results
-
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```  
 ## LGBTQ
 ## Graphic Descriptive Results
 ## Numerical Summaries
