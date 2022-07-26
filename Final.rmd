@@ -18,7 +18,13 @@ FinalDat <-read.csv(file="final_Data.csv",header=TRUE)
 FinalData <- FinalDat  %>% select(-one_of("X"))
 FinalData <- FinalData %>%
 mutate(across(where(is.character), as.factor))
+
 ```
+
+```{r}
+FinalDat <- read.csv(file="final_Data.csv")
+```
+
 
 # Introduction
 
@@ -26,20 +32,24 @@ A new  preventative vaccine (covid91) is under test in clinical trials. Given th
 
 ## Males
 ```{r}
-dd2 <- males %>% group_by(infected, treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+Males <- filter(FinalDat, sex=="M")
+```
 
+```{r}
+Males <- select(Males, -sex)
+```
 
+## Graphic Descriptive Results
+```{r}
+dd2 <- Males %>% group_by(infected,treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
 # the group_by followed by summarize(count=n())
-
 basicC <- ggplot(dd2,aes(x=infected,y=count,fill=treatment))
 basicC + geom_bar(stat="identity",position="dodge")
-
 #Now for percentage plot
-
 basicCC <- ggplot(dd2,aes(x=infected,y=prcnt*100,fill=treatment)) 
 basicCC + geom_bar(stat="identity", position = "dodge")
 ```
-## Graphic Descriptive Results
+The bar chart shows that males who take the vaccine (covid91) are far less likely to contract the virus covid19. Males who take the placebo are 68% more likely to contract covid19 versus males who took the vaccine and contacted covid19 32% of the time. 
 ## Numerical Summaries
 ## Inferential Results
 
