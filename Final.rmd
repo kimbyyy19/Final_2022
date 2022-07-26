@@ -107,6 +107,11 @@ chisq.test(table1)
 chisqtestGC(table1)
 fisher.test(table1)
 ```  
+
+I reject the $H_0$ Null Hypothesis, and accept the $H_a$ Alternative hypothesis as true. There is a  negative effect when Females took the placebo vs the covid91 vaccine which has a positive effect.  The Chi-squared test shows that the P-value is 0.0011 an amount less than .05. The Fisher exact test shows the P-Value is 0.0009484 also an number less than 0.05. The test also confirms that the odds ratio of females who take the placebo contract covid19 almost 1.4 more times than Females who took the vaccine. The covid91 vaccine is effective for the Female subgroup tested. I would recommend the Covid91 for the Female subgroup. 
+
+
+
 ## LGBTQ
 ## Graphic Descriptive Results
 ## Numerical Summaries
