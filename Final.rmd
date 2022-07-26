@@ -134,6 +134,15 @@ The bar chart shows that Females who take the vaccine (covid91) are less likely 
 
 
 ## Numerical Summaries
+
+```{r}
+table1 <- xtabs(~infected + treatment, data=Females)
+rowPerc(table1)
+colPerc(table1)
+```  
+
+
+
 ## Inferential Results
 
 
