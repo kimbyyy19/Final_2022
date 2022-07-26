@@ -149,7 +149,7 @@ chisqtestGC(table1)
 fisher.test(table1)
 ```    
 
-I reject the Null Hypothesis. Preventative vaccine, covid91, treatment has a negative effective for subgroup LGBTQ. Members of the LGBTQ subgroup were more likely to contract covid 19 after taking the vaccine. The P-Value for Chi-Sqaured test P-Value is 0.0000000132 lessthan 0.05. the Fisher exact test P-value is 0.000000001642. The odds ratio is 0.1465. I would not recommend that memebers of the LGBTQ subgroup take the covid91 vaccine.  
+I reject the Null Hypothesis. Preventative vaccine, covid91, treatment has a negative effective for subgroup LGBTQ. Members of the LGBTQ subgroup were more likely to contract covid 19 after taking the vaccine. The P-Value for Chi-Sqaured test P-Value is 0.0000000132 less than 0.05. the Fisher exact test P-value is 0.000000001642. The odds ratio is 0.1465. I would not recommend that memebers of the LGBTQ subgroup take the covid91 vaccine.  
 
 
 
