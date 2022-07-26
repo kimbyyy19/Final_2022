@@ -75,8 +75,27 @@ I reject the  Null Hypothesis, and accept the Alternative hypothesis as true. Th
 
 
 ## Females
+```{r}
+Females <- filter(FinalDat, sex=="F")
+```
+
+```{r}
+Females <- select(Females, -sex)
+```
 ## Graphic Descriptive Results
+
+```{r}
+barchartGC(~infected + treatment,data=Females)
+barchartGC(~infected + treatment,data=Females, type="percent")
+```  
+
+The bar chart shows that Females who take the vaccine (covid91) are less likely to contract the virus covid19. Females who took the placebo are 58% more likely to contract covid19 versus Females who took the vaccine and contacted covid19 42% of the time.
+
+
 ## Numerical Summaries
+
+
+
 ## Inferential Results
 
 ## LGBTQ
