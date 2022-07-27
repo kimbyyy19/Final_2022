@@ -30,7 +30,7 @@ FinalDat <- read.csv(file="final_Data.csv")
 
 A new  preventative vaccine (covid91) is under test in clinical trials. Given the nature of this vaccine it is suspected that the drug may exhibit different effectiveness across the variety of subpopulations tracked. Consider population subgroups by gender( guys and gals), drug use, and sexual orientation. Write a complete report that separately considers this drug for each subgroup and your recommendations as to whether people in the subgroup should take the vaccine. Structure your report in four sections each devoted to one of the four subgroups, use null and alternative hypothesis statements and correct statistical verbage when referencing p-values in conclusions.
 
-## Males
+# Males
 ```{r}
 Males <- filter(FinalDat, sex=="M")
 ```
@@ -49,7 +49,10 @@ basicC + geom_bar(stat="identity",position="dodge")
 basicCC <- ggplot(dd2,aes(x=infected,y=prcnt*100,fill=treatment)) 
 basicCC + geom_bar(stat="identity", position = "dodge")
 ```
-The bar chart shows that males who take the vaccine (covid91) are far less likely to contract the virus covid19. Males who take the placebo are 68% more likely to contract covid19 versus males who took the vaccine and contacted covid19 32% of the time. 
+
+
+The bar chart shows that males who take the vaccine (covid91) are far less likely to contract the virus covid19. Males who take the placebo are 68% more likely to contract covid19 versus males who took the vaccine and contacted covid19 32% of the time.
+
 ## Numerical Summaries
 
 ```{r}
@@ -57,6 +60,8 @@ table1 <- xtabs(~infected + treatment, data=Males)
 rowPerc(table1)
 colPerc(table1)
 ```  
+
+
 The percentage of infection is much higher for males who took the placebo. Those who took the placebo became infected approximately 67.78%  of the time versus 32.22% who took the vaccine and contracted covid19. The Males in the placebo group are 2 times more likely to become infected when receiving the placebo.
 
 
@@ -66,15 +71,26 @@ The percentage of infection is much higher for males who took the placebo. Those
 chisq.test(table1)
 chisqtestGC(table1)
 fisher.test(table1)
+fishtestf<-fisher.test(table1)
+fishtestf
 ```  
 
 I reject the  Null Hypothesis, and accept the Alternative hypothesis as true. There is a significant negative effect when Males took the placebo vs the covid91 vaccine which has a positive effect.  The Chi-squared test shows that the P-value is 0.00000000004812 an amount significantly less than .05. The Fisher exact test shows the P-Value is 0.00000000002645 also an number significalty less than 0.05. The test also confirms that the odds ratio of men who take the placebo contract covid19 2 to 1 more times. The covid91 vaccine is effective for the Male subgroup tested. I would recommend the Covid91 vaccine for the Male subgroup. 
 
 
+## Efficecy
+```{r}
+options(digits = 1)
+maleffic=fishtestf$estimate/(1+fishtestf$estimate)*100
+malefficlo=fishtestf$conf.int[1]/(1+fishtestf$conf.int[1])*100
+maleffichi=fishtestf$conf.int[2]/(1+fishtestf$conf.int[2])*100
+print(maleffic)
+print(malefficlo)
+print(maleffichi)
+```
 
 
-
-## Females
+# Females
 ```{r}
 Females <- filter(FinalDat, sex=="F")
 ```
@@ -84,9 +100,17 @@ Females <- select(Females, -sex)
 ```
 ## Graphic Descriptive Results
 
+
 ```{r}
-barchartGC(~infected + treatment,data=Females)
-barchartGC(~infected + treatment,data=Females, type="percent")
+
+dd2 <- Females %>% group_by(infected,treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+# the group_by followed by summarize(count=n())
+basicC <- ggplot(dd2,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+#Now for percentage plot
+
+basicCC <- ggplot(dd2,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
 ```  
 
 The bar chart shows that Females who take the vaccine (covid91) are less likely to contract the virus covid19. Females who took the placebo are 58% more likely to contract covid19 versus Females who took the vaccine and contacted covid19 42% of the time.
@@ -94,40 +118,58 @@ The bar chart shows that Females who take the vaccine (covid91) are less likely 
 
 ## Numerical Summaries
 ```{r}
-table1 <- xtabs(~infected + treatment, data=Females)
-rowPerc(table1)
-colPerc(table1)
+table2 <- xtabs(~infected + treatment, data=Females)
+rowPerc(table2)
+colPerc(table2)
 ```  
 The percentage of infection is much higher for Females who took the placebo. Those who took the placebo became infected approximately 58.89%  of the time versus 41.11% who took the vaccine and contracted covid19. The Females in the placebo group are 1.5 times more likely to become infected when receiving the placebo.
 
 
 ## Inferential Results
 ```{r}
-chisq.test(table1)
-chisqtestGC(table1)
-fisher.test(table1)
+chisq.test(table2)
+chisqtestGC(table2)
+fisher.test(table2)
+fishtestf<-fisher.test(table2)
+fishtestf
 ```  
 
 I reject the  Null Hypothesis, and accept the  Alternative hypothesis as true. There is a  negative effect when Females took the placebo vs the covid91 vaccine which has a positive effect.  The Chi-squared test shows that the P-value is 0.0011 an amount less than .05. The Fisher exact test shows the P-Value is 0.0009484 also an number less than 0.05. The test also confirms that the odds ratio of females who take the placebo contract covid19 almost 1.4 more times than Females who took the vaccine. The covid91 vaccine is effective for the Female subgroup tested. I would recommend the Covid91 for the Female subgroup. 
 
-
-## LGBTQ
-
+## Efficecy
 ```{r}
-LGBTQ = filter(FinalData,LGBTQ=="straight")
-
+options(digits = 1)
+femeffic=fishtestf$estimate/(1+fishtestf$estimate)*100
+femefficlo=fishtestf$conf.int[1]/(1+fishtestf$conf.int[1])*100
+femeffichi=fishtestf$conf.int[2]/(1+fishtestf$conf.int[2])*100
+print(femeffic)
+print(femefficlo)
+print(femeffichi)
 ```
+The confidence interval of the effectiveness of the vaccine for females has a low of `r femefficlo` and a high of `r femeffichi`.
+
+
+# LGBTQ
 
 ```{r}
 LGBTQ = filter(FinalData,LGBTQ=="gay")
+
 ```
+
+
 
 
 ## Graphic Descriptive Results
 
 ```{r}
-barchartGC(~infected + treatment,data=LGBTQ)
-barchartGC(~infected + treatment,data=LGBTQ, type="percent")
+dd2 <- LGBTQ %>% group_by(infected,treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+# the group_by followed by summarize(count=n())
+basicC <- ggplot(dd2,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+#Now for percentage plot
+basicCC <- ggplot(dd2,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+
 ```  
 The bar chart shows that in the individuals in subgroup LGBTQ  who take the vaccine (covid91) are more likely to contract the virus covid19. Subgroup LGBTQ who take the placebo are 13% less likely to contract covid19 versus LGBTQ subgroup who took the vaccine and contacted covid19 87% of the time. 
 
@@ -154,11 +196,18 @@ I reject the Null Hypothesis. Preventative vaccine, covid91, treatment has a neg
 
 
 
-## Druggies
+# Druggies
+
+
+
+
+
+
 ## Graphic Descriptive Results
 ## Numerical Summaries
 ## Inferential Results
 
 
-#Discussion and Conclusion
+# Discussion and Conclusion
+
 
