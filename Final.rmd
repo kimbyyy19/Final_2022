@@ -171,6 +171,8 @@ basicCC <- ggplot(dd2,aes(x=infected,y=prcnt*100,fill=treatment))
 basicCC + geom_bar(stat="identity", position = "dodge")
 
 ```  
+
+
 The bar chart shows that in the individuals in subgroup LGBTQ  who take the vaccine (covid91) are more likely to contract the virus covid19. Subgroup LGBTQ who take the placebo are 13% less likely to contract covid19 versus LGBTQ subgroup who took the vaccine and contacted covid19 87% of the time. 
 
 
@@ -181,6 +183,8 @@ table1 <- xtabs(~infected + treatment, data=LGBTQ)
 rowPerc(table1)
 colPerc(table1)
 ```  
+
+
 The percentage of infection is higher for subgroup LGBTQ who took the vaccine. Those who took the placebo became infected approximately 13.33%  of the time versus 86.67% who took the vaccine and contracted covid19. The subgroup LBGTQ in the vaccine group are 0.1465 times more likely to become infected when receiving the vaccine.
 
 
