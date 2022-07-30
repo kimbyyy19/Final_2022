@@ -64,7 +64,7 @@ colPerc(table1)
 ```  
 
 
-The percentage of infection is much higher for males who took the placebo. Those who took the placebo became infected approximately 67.78%  of the time versus 32.22% who took the vaccine and contracted covid19. The Males in the placebo group are 2 times more likely to become infected when receiving the placebo.
+The percentage of infection is much higher for males who took the placebo. Those who took the placebo became infected approximately 68%  of the time versus 32% who took the vaccine and contracted covid19. The Males in the placebo group are 3 times more likely to become infected when receiving the placebo.These results are indicating that the vaccine is effective.
 
 
 
@@ -76,15 +76,15 @@ fishtestm<-fisher.test(table1)
 print(fishtestm)
 ```  
 
-I reject the  Null Hypothesis, and accept the Alternative hypothesis as true. There is a significant negative effect when Males took the placebo vs the covid91 vaccine which has a positive effect.  The Chi-squared test shows that the P-value is 0.00000000004812 an amount significantly less than .05. The Fisher exact test shows the P-Value is 0.00000000002645 also an number significalty less than 0.05. The test also confirms that the odds ratio of men who take the placebo contract covid19 2 to 1 more times. The covid91 vaccine is effective for the Male subgroup tested. I would recommend the Covid91 vaccine for the Male subgroup. 
+The inferential results show that those that took the placebo are a little over twice as likely to catch covid19 as those that took the vaccine. The p-value being very low signifies that there is a small chance of getting these results if there was no difference between the placebo and the vaccine.
 
 
 ## Efficecy
 ```{r}
 options(digits = 1)
-maleffic=fishtestf$estimate/(1+fishtestf$estimate)*100
-malefficlo=fishtestf$conf.int[1]/(1+fishtestf$conf.int[1])*100
-maleffichi=fishtestf$conf.int[2]/(1+fishtestf$conf.int[2])*100
+maleffic=fishtestm$estimate/(1+fishtestm$estimate)*100
+malefficlo=fishtestm$conf.int[1]/(1+fishtestm$conf.int[1])*100
+maleffichi=fishtestm$conf.int[2]/(1+fishtestm$conf.int[2])*100
 print(maleffic)
 print(malefficlo)
 print(maleffichi)
@@ -116,7 +116,7 @@ basicCC <- ggplot(dd2,aes(x=infected,y=prcnt*100,fill=treatment))
 basicCC + geom_bar(stat="identity", position = "dodge")
 ```  
 
-The bar chart shows that Females who take the vaccine (covid91) are less likely to contract the virus covid19. Females who took the placebo are 58% more likely to contract covid19 versus Females who took the vaccine and contacted covid19 42% of the time.
+The bar chart shows that Females who take the vaccine (covid91) are less likely to contract the virus covid19. Females who took the placebo are 58% more likely to contract covid19 versus Females who took the vaccine and contacted covid19 40% of the time.
 
 
 ## Numerical Summaries
@@ -125,7 +125,7 @@ table2 <- xtabs(~infected + treatment, data=Females)
 rowPerc(table2)
 colPerc(table2)
 ```  
-The percentage of infection is much higher for Females who took the placebo. Those who took the placebo became infected approximately 59%  of the time versus 41% who took the vaccine and contracted covid19. The Females in the placebo group are 1.5 times more likely to become infected when receiving the placebo.
+.The percentage of infection is much higher for Females who took the placebo. Those who took the placebo became infected approximately 59%  of the time versus 41% who took the vaccine and contracted covid19. 
 
 
 ## Inferential Results
@@ -136,7 +136,7 @@ fishtestf<-fisher.test(table2)
 fishtestf
 ```  
 
-I reject the  Null Hypothesis, and accept the  Alternative hypothesis as true. There is a  negative effect when Females took the placebo vs the covid91 vaccine which has a positive effect.  The Chi-squared test shows that the P-value is 0.0011 an amount less than .05. The Fisher exact test shows the P-Value is 0.0009484 also an number less than 0.05. The test also confirms that the odds ratio of females who take the placebo contract covid19 almost 1.4 more times than Females who took the vaccine. The covid91 vaccine is effective for the Female subgroup tested. I would recommend the Covid91 for the Female subgroup. 
+ The results show about a 1 odds ratio. This tells us that those that took the placebo are about 1 times as likely to catch covid19 than those that took the vaccine. The results also gave a low p-value which indicates a low chance of getting these results if there was no difference between females who took the placebo or the vaccine.
 
 ## Efficecy
 ```{r}
@@ -190,7 +190,7 @@ colPerc(table3)
 ```  
 
 
-The percentage of infection is higher for subgroup LGBTQ who took the vaccine. Those who took the placebo became infected approximately 13%  of the time versus 87% who took the vaccine and contracted covid19. The subgroup LBGTQ in the vaccine group are 0.1465 times more likely to become infected when receiving the vaccine.
+The percentage of infection is higher for subgroup LGBTQ who took the vaccine. Those who took the placebo became infected approximately 13%  of the time versus 87% who took the vaccine and contracted covid19. The subgroup LBGTQ in the vaccine group are 3 times more likely to become infected when receiving the vaccine.
 
 
 ## Inferential Results
@@ -201,13 +201,9 @@ fishtestL<-fisher.test(table3)
 fishtestL
 ```    
 
-I reject the Null Hypothesis. Preventative vaccine, covid91, treatment has a negative effective for subgroup LGBTQ. Members of the LGBTQ subgroup were more likely to contract covid 19 after taking the vaccine. The P-Value for Chi-Sqaured test P-Value is 0.0000000132 less than 0.05. the Fisher exact test P-value is 0.000000001642. The odds ratio is 0.1465. I would not recommend that memebers of the LGBTQ subgroup take the covid91 vaccine.  
+The odds ratio of 0.1 tells us that those that took the placebo are 0.1 times as likely to catch covid19 than those that took the vaccine.
 
 ## Efficecy
-
-
-
-
 
 ```{r}
 Leffic=fishtestL$estimate/(1+fishtestL$estimate)*100
@@ -224,19 +220,69 @@ The efficacy shows that the vaccine is 13% effective. The confidence interval fo
 # Druggies
 
 ```{r}
-DrugUser = filter(FinalData, DrugUser=="no")
-DrugUser = filter(FinalData, DrugUser=="yes")
-
+DrugUser<-filter(FinalData, DrugUser == "yes")
 ```
 
+## Graphic Description
+```{r}
+dd2 <- DrugUser %>% group_by(infected,treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+
+# the group_by followed by summarize(count=n())
+basicC <- ggplot(dd2,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+
+#Now for percentage plot
+basicCC <- ggplot(dd2,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
+
+The results from the barchart for the Drug users shows that those that took the vaccine got covid19 more than those that took the placebo. About 85% of those that got covid19 took the vaccine, while about 15% of those that got it took the placebo
+
+## Numerical Results
+```{r}
+table4 <- xtabs(~infected + treatment, data=DrugUser)
+rowPerc(table4)
+colPerc(table4)
+```
+
+The numerical results tell us that for the drug users about 3% of those that took the vaccine got covid19, and 0.6% of those who took the placebo got covid19.
 
 
-
-## Graphic Descriptive Results
-## Numerical Summaries
 ## Inferential Results
+```{r}
+chisq.test(table4)
+chisqtestGC(table4)
+fishtestD<-fisher.test(table4)
+fishtestD
+```
+
+The inferential results showed that those that took the placebo were 0.2 times as likely to get covid than those that got the vaccine. The p-value is very low which tells us that there is very little chance of getting these results if there was no difference between the placebo and the vaccine for drug users.
+
+
+## Efficacy
+```{r}
+Deffic=fishtestD$estimate/(1+fishtestD$estimate)*100
+Defficlo=fishtestD$conf.int[1]/(1+fishtestD$conf.int[1])*100
+Deffichi=fishtestD$conf.int[2]/(1+fishtestD$conf.int[2])*100
+print(Deffic)
+print(Defficlo)
+print(Deffichi)
+```
+
+The efficacy shows that the vaccine is 15% effective. This confidence interval has a low of `r Defficlo` and a high of `r Deffichi`.
+
+
+
+
+
+
 
 
 # Discussion and Conclusion
+
+The immunization for the males was successful in shielding them from covid19. The viability of the vaccine for the males was `r maleffic`, which was the most elevated for any gathering. The vaccine was good in keeping females from getting covid19 too. The viability results showed that for females the vaccine has a `r femeffic` adequacy. The vaccine didn't safeguard the people that were LGBTQ from getting covid19. The adequacy of the vaccine on the LGBTQ people was just `r Leffic`, which was the most minimal of any gathering. The immunization didn't work for the DrugUsers either, with just `r Deffic` viability.
+
+The vaccine ought  be taken on the off chance that a person is male or female with no other variables. It isn't recommended to take the vaccine on the off chance that you are a person who is LGBTQ or a Drug User.
+
 
 
