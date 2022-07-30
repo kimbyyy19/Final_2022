@@ -89,7 +89,7 @@ print(maleffic)
 print(malefficlo)
 print(maleffichi)
 ```
-The confidence interval for the effectiveness of the vaccine on males has a low or `r malefficlo` and a high of `r maleffichi`.
+The confidence interval for the effectiveness of the vaccine on males has a lower `r malefficlo` and a high  `r maleffichi`.
 
 # Females
 ```{r}
@@ -125,7 +125,7 @@ table2 <- xtabs(~infected + treatment, data=Females)
 rowPerc(table2)
 colPerc(table2)
 ```  
-.The percentage of infection is much higher for Females who took the placebo. Those who took the placebo became infected approximately 59%  of the time versus 41% who took the vaccine and contracted covid19. 
+The percentage of infection is much higher for Females who took the placebo. Those who took the placebo became infected approximately 59%  of the time versus 41% who took the vaccine and contracted covid19. 
 
 
 ## Inferential Results
